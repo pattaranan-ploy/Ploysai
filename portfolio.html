@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>E-Portfolio | [ชื่อนามสกุล]</title>
+  <style>
+   :root{
+  --bg:#f7f7fb; 
+  --card:#ffffff; 
+  --ink:#1f2937; 
+  --muted:#6b7280; 
+  --brand:#2563eb;
+  --line:#e5e7eb;
+  --accent:#10b981; /* สีเขียวสดใสสำหรับป้าย/ไฮไลท์ */
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0; 
+  font-family:'Inter', system-ui, "Segoe UI", Tahoma, sans-serif; 
+  color:var(--ink);
+  background:linear-gradient(180deg, var(--bg), #fff 60%);
+  line-height:1.6;
+  font-size:16px;
+}
+
+header{
+  position:sticky; 
+  top:0; 
+  z-index:10; 
+  background:#fff; 
+  border-bottom:1px solid var(--line);
+  box-shadow:0 2px 5px rgba(0,0,0,0.05);
+}
+
+.wrap{max-width:1000px; margin:auto; padding:0 20px}
+
+nav{
+  display:flex; 
+  gap:14px; 
+  align-items:center; 
+  height:58px; 
+  overflow:auto;
+}
+nav a{
+  text-decoration:none; 
+  color:var(--muted); 
+  padding:8px 14px; 
+  border-radius:999px; 
+  white-space:nowrap; 
+  font-weight:500;
+  transition:0.2s;
+}
+nav a:hover, nav a:focus{
+  background:var(--line); 
+  color:var(--ink);
+  transform:translateY(-2px);
+}
+
+.hero{
+  padding:60px 0; 
+  display:grid; 
+  grid-template-columns:140px 1fr; 
+  gap:24px; 
+  align-items:center;
+}
+.avatar{
+  width:140px; 
+  aspect-ratio:1/1; 
+  border-radius:20px; 
+  object-fit:cover; 
+  border:3px solid var(--line); 
+  background:#ddd;
+  box-shadow:0 4px 8px rgba(0,0,0,0.1);
+}
+
+h1{
+  margin:0 0 6px 0; 
+  font-size:clamp(28px, 3.5vw, 40px);
+  font-weight:700;
+  color:var(--brand);
+}
+.muted{color:var(--muted)}
+.badge{
+  display:inline-block; 
+  padding:4px 10px; 
+  border-radius:999px; 
+  background:var(--brand); 
+  color:#fff; 
+  font-size:12px; 
+  font-weight:600;
+}
+
+section{padding:32px 0; scroll-margin-top:72px}
+
+.grid{display:grid; gap:16px}
+.grid.cards{grid-template-columns:repeat(auto-fill, minmax(240px,1fr))}
+
+.card{
+  background:var(--card); 
+  border:1px solid var(--line); 
+  border-radius:16px; 
+  padding:20px; 
+  box-shadow:0 4px 12px rgba(0,0,0,0.05);
+  transition:0.2s;
+}
+.card:hover{transform:translateY(-4px); box-shadow:0 8px 20px rgba(0,0,0,0.08);}
+
+h2{font-size:22px; margin:0 0 12px; font-weight:600;}
+h3{font-size:18px; margin:0 0 6px; font-weight:500;}
+
+.list{margin:0; padding-left:18px}
+.tag{
+  display:inline-block; 
+  padding:4px 10px; 
+  border:1px solid var(--line); 
+  border-radius:999px; 
+  font-size:12px; 
+  margin:2px 6px 2px 0; 
+  color:var(--brand);
+  font-weight:500;
+}
+
+.row{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
+.skill{display:grid; grid-template-columns:140px 1fr; gap:12px; align-items:center}
+
+progress{width:100%; height:12px; -webkit-appearance:none; appearance:none}
+progress::-webkit-progress-bar{background:#eef2ff; border-radius:8px}
+progress::-webkit-progress-value{background:var(--brand); border-radius:8px}
+
+footer{
+  padding:32px 0; 
+  border-top:1px solid var(--line); 
+  color:var(--muted); 
+  font-size:14px;
+  text-align:center;
+}
+
+/* ตารางสวย */
+table{
+  width:100%; 
+  border-collapse:collapse; 
+  background:#fff; 
+  border:1px solid var(--line); 
+  border-radius:8px; 
+  overflow:hidden;
+}
+thead th{
+  background:#f1f5f9; 
+  text-align:left; 
+  padding:12px; 
+  font-weight:700; 
+  border-bottom:1px solid var(--line);
+}
+tbody td{
+  padding:12px; 
+  border-bottom:1px solid var(--line); 
+  color:var(--ink);
+}
+tbody tr:last-child td{border-bottom:0}
+
+/* รูปภาพ gallery */
+.gallery{
+  display:grid; 
+  grid-template-columns:repeat(auto-fit, minmax(140px,1fr)); 
+  gap:12px;
+}
+.gallery img{
+  width:100%; 
+  height:140px; 
+  object-fit:cover; 
+  border-radius:12px; 
+  border:1px solid var(--line);
+  transition:0.2s;
+}
+.gallery img:hover{transform:scale(1.05);}
+
+/* canvas placeholder */
+.canvas-wrap{
+  background:#f8fafc; 
+  border:1px dashed var(--line); 
+  padding:14px; 
+  border-radius:10px; 
+  text-align:center;
+}
+canvas{max-width:100%; border-radius:10px; background:#fff; border:1px solid var(--line);}
+
+/* audio */
+.audio-card{
+  display:flex; 
+  flex-direction:column; 
+  gap:10px; 
+  align-items:flex-start;
+}
+
+@media (max-width:640px){
+  .hero{grid-template-columns:1fr; text-align:center}
+  .skill{grid-template-columns:1fr}
+}
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <nav aria-label="เมนูหลัก">
+        <a href="#about">เกี่ยวกับฉัน</a>
+        <a href="#education">การศึกษา</a>
+        <a href="#skills">ทักษะ</a>
+        <a href="#projects">ผลงาน</a>
+        <a href="#media">สื่อ & ตาราง</a>
+        <a href="#contact">ติดต่อ</a>
+        <span class="badge">E-Portfolio</span>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- Hero -->
+    <section class="hero" id="about">
+      <img class="avatar" src="481990013_1185589746455434_8920439727256670988_n.jpg" alt="รูปโปรไฟล์ [ชื่อนามสกุล]" />
+      <div>
+        <h1>Pattaranan Mungbang</h1>
+        <p class="muted">ตำแหน่ง/ความเชี่ยวชาญ: ครูคอมพิวเตอร์ เทคโนโลยี | Front-End]</p>
+        <p>
+เป็นผู้ที่มีความมุ่งมั่นในการพัฒนาทักษะด้านเทคโนโลยีและการสื่อสาร 
+มีประสบการณ์สร้างสื่อการสอนและเว็บไซต์เพื่อสนับสนุนการเรียนรู้ 
+เป้าหมายของฉันคือการพัฒนานวัตกรรมการศึกษาและต่อยอดองค์ความรู้ให้เกิดประโยชน์ต่อองค์กรและสังคม
+</p>
+        <div class="row" aria-label="ลิงก์สำคัญ">
+          <a class="tag" href="[ลิงก์ผลงานรวม]" target="_blank">Portfolio</a>
+          <a class="tag" href="[ลิงก์เรซูเม่.pdf]" target="_blank">Resume (PDF)</a>
+          <a class="tag" href="mailto:[อีเมล]">Email</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education (ย่อ) -->
+    <section id="education">
+      <h2>การศึกษา</h2>
+      <div class="grid cards">
+        <article class="card">
+          <h3>[วุฒิการศึกษา] – [สาขา]</h3>
+          <p class="muted">[ชื่อสถาบัน] · [ปีสำเร็จการศึกษา]</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills">
+      <h2>ทักษะ</h2>
+      <div class="grid card">
+        <div class="skill">
+          <div>HTML/CSS</div>
+          <progress value="90" max="100" aria-label="HTML/CSS 90%"></progress>
+        </div>
+        <div class="skill">
+          <div>Google Apps Script (พื้นฐาน)</div>
+          <progress value="70" max="100" aria-label="Apps Script 70%"></progress>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects">
+      <h2>ผลงานคัดเลือก</h2>
+      <div class="grid cards">
+        <article class="card">
+          <h3>[ชื่อโปรเจ็กต์ 1]</h3>
+          <p class="muted">บทบาท: [เช่น ออกแบบ/พัฒนา] · ปี [20XX]</p>
+          <p>คำอธิบายสั้น ๆ 2–3 บรรทัด วัตถุประสงค์ และผลลัพธ์</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Media: table, canvas, audio, images -->
+    <section id="media">
+      <h2>สื่อ & ตาราง</h2>
+
+      <!-- 1) ตารางตัวอย่าง -->
+      <article class="card" aria-labelledby="table-title">
+        <h3 id="table-title">ตัวอย่างตารางสรุปผลงาน</h3>
+        <p class="muted">ตารางนี้แสดงผลงาน/ปี/บทบาท</p>
+        <table role="table" aria-describedby="table-desc">
+          <caption id="table-desc" style="caption-side:bottom; text-align:left; padding:8px 0; color:var(--muted);">หมายเหตุ: แทนที่ข้อมูลในตารางด้วยข้อมูลจริงของท่าน</caption>
+          <thead>
+            <tr><th>ปี</th><th>ผลงาน</th><th>บทบาท</th><th>ลิงก์</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2024</td>
+              <td>เว็บไซต์การสอน HTML เบื้องต้น</td>
+              <td>ผู้ออกแบบ/ผู้พัฒนา</td>
+              <td><a href="[ลิงก์ผลงาน]" target="_blank">ดูผลงาน</a></td>
+            </tr>
+            <tr>
+              <td>2023</td>
+              <td>โครงงาน Apps Script เก็บผลการเรียน</td>
+              <td>นักพัฒนา</td>
+              <td><a href="[ลิงก์]" target="_blank">ดู</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+
+      <!-- 2) Canvas (แท็ก canvas ใส่ไว้ให้ ครูสามารถขอให้เพิ่ม JS เพื่อวาดรูปได้ในภายหลัง) -->
+      <article class="card">
+        <h3>ตัวอย่างแท็ก &lt;canvas&gt;</h3>
+        <p class="muted">Canvas นี้เป็นที่วาดกราฟิก (ต้องใช้ JavaScript เพื่อวาดภาพ หากต้องการให้ช่วยวาดแจ้งได้)</p>
+        <div class="canvas-wrap" role="group" aria-label="canvas preview">
+          <!-- กำหนดขนาดไว้; ไม่มี JavaScript จะเห็นเป็นพื้นที่ว่างพร้อมข้อความทดแทน -->
+          <canvas id="mypaint" width="720" height="200" aria-label="พื้นที่สำหรับวาดกราฟิก"></canvas>
+          <p style="margin:8px 0 0; color:var(--muted); font-size:13px;">(พื้นที่แคนวาส — ต้องใช้ JavaScript เพื่อวาดภาพภายใน)</p>
+        </div>
+      </article>
+
+      <!-- 3) เสียง (audio) -->
+      <article class="card">
+        <h3>ตัวอย่างแท็ก &lt;audio&gt;</h3>
+        <p class="muted">ใส่ไฟล์เสียงบรรยายผลงานหรือไฟล์สาธิตการสอน</p>
+        <div class="audio-card">
+          <!-- แก้ src เป็นไฟล์ mp3 จริงของครู -->
+          <audio controls preload="none" aria-label="ไฟล์เสียงบรรยาย">
+            <source src="[ลิงก์ไฟล์เสียง.mp3]" type="audio/mpeg">
+            เบราว์เซอร์ของท่านไม่รองรับการเล่นไฟล์เสียงนี้ — กรุณาดาวน์โหลดไฟล์แทน
+          </audio>
+          <small class="muted">ขนาดไฟล์แนะนำ: ไม่เกิน 5MB (หากต้องฝังหลายไฟล์ แนะนำใช้ลิงก์ภายนอก)</small>
+        </div>
+      </article>
+
+      <!-- 4) แกลเลอรีรูปภาพ (img + figure) -->
+      <article class="card">
+        <h3>รูปภาพตัวอย่าง</h3>
+        <p class="muted">แสดงตัวอย่างผลงาน รูปกิจกรรม หรือโลโก้โรงเรียน</p>
+        <div class="gallery" role="list">
+          <figure role="listitem">
+            <img src="[ลิงก์รูป1.jpg]" alt="ผลงาน 1 — เว็บสอน HTML" />
+            <figcaption style="font-size:13px; color:var(--muted); padding-top:6px">เว็บสอน HTML — 2024</figcaption>
+          </figure>
+          <figure role="listitem">
+            <img src="[ลิงก์รูป2.jpg]" alt="กิจกรรมอบรมครู" />
+            <figcaption style="font-size:13px; color:var(--muted); padding-top:6px">อบรมเชิงปฏิบัติการ — 2023</figcaption>
+          </figure>
+          <figure role="listitem">
+            <img src="[ลิงก์โลโก้โรงเรียน.png]" alt="โลโก้โรงเรียน" />
+            <figcaption style="font-size:13px; color:var(--muted); padding-top:6px">โลโก้โรงเรียน</figcaption>
+          </figure>
+        </div>
+      </article>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+      <h2>ติดต่อ</h2>
+      <div class="card">
+        <p>อีเมล: <a href="mailto:[อีเมล]">[อีเมล]</a> · โทร: [เบอร์โทร] · ที่อยู่: [จังหวัด/ประเทศ]</p>
+        <p class="muted">หมายเหตุ: แบบฟอร์มนี้ไม่เก็บข้อมูล (ไม่มีสคริปต์)</p>
+        <form action="mailto:[อีเมล]" method="post" enctype="text/plain">
+          <label>ชื่อ-สกุล<br><input type="text" name="name" required style="width:100%; padding:10px; border:1px solid var(--line); border-radius:8px"></label><br><br>
+          <label>ข้อความ<br><textarea name="message" rows="4" required style="width:100%; padding:10px; border:1px solid var(--line); border-radius:8px"></textarea></label><br><br>
+          <button type="submit" style="padding:10px 16px; border:0; background:var(--brand); color:#fff; border-radius:10px">ส่งข้อความ</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      © <span id="y">2025</span> [ชื่อนามสกุล] · E-Portfolio
+    </div>
+  </footer>
+</body>
+</html>
